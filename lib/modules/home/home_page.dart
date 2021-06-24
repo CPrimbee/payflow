@@ -69,7 +69,7 @@ class _HomePageState extends State<HomePage> {
                 )),
             GestureDetector(
               onTap: () {
-                print("Clicou");
+                print("CLICOU");
               },
               child: Container(
                 width: 56,
