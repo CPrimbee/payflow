@@ -21,7 +21,8 @@ class _BarcodeScannerPageState extends State<BarcodeScannerPage> {
     controller.getAvailableCameras();
     controller.statusNotifier.addListener(() {
       if (controller.status.hasBarcode) {
-        Navigator.pushReplacementNamed(context, "/insert_boleto");
+        Navigator.pushReplacementNamed(context, "/insert_boleto",
+            arguments: controller.status.barcode);
       }
     });
     super.initState();
@@ -59,7 +60,7 @@ class _BarcodeScannerPageState extends State<BarcodeScannerPage> {
             child: Scaffold(
                 backgroundColor: Colors.transparent,
                 appBar: AppBar(
-                  backgroundColor: Colors.black,
+                  backgroundColor: Colors.black.withOpacity(0.6),
                   title: Text("Escaneie o código de barras do boleto",
                       style: AppTextStyles.buttonBackground),
                   centerTitle: true,
@@ -68,10 +69,6 @@ class _BarcodeScannerPageState extends State<BarcodeScannerPage> {
                   ),
                 ),
                 body: Column(children: [
-                  Expanded(
-                      child: Container(
-                    color: Colors.black.withOpacity(0.6),
-                  )),
                   Expanded(
                       flex: 2,
                       child: Container(
@@ -83,13 +80,14 @@ class _BarcodeScannerPageState extends State<BarcodeScannerPage> {
                   )),
                 ]),
                 bottomNavigationBar: SetLabelButtons(
-                    enablePrimaryColor: false,
-                    primaryLabel: "Inserir código do boleto",
-                    primaryOnPressed: () {
-                      Navigator.pushReplacementNamed(context, "/insert_boleto");
-                    },
-                    secondaryLabel: "Adicionar da galeria",
-                    secondaryOnPressed: () {})),
+                  enablePrimaryColor: false,
+                  primaryLabel: "Inserir código do boleto",
+                  primaryOnPressed: () {
+                    controller.status = BarcodeScannerStatus.error("Error");
+                  },
+                  secondaryLabel: "Adicionar da galeria",
+                  secondaryOnPressed: controller.scanWithCamera,
+                )),
           ),
           ValueListenableBuilder<BarcodeScannerStatus>(
             valueListenable: controller.statusNotifier,
@@ -105,7 +103,6 @@ class _BarcodeScannerPageState extends State<BarcodeScannerPage> {
                     },
                     secondaryLabel: "Digitar código",
                     secondaryOnPressed: () {
-                      print('clicou');
                       Navigator.pushReplacementNamed(context, "/insert_boleto");
                     });
               } else {
