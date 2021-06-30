@@ -17,7 +17,7 @@ void main() {
         ),
       ));
 
-      expect(find.byType(Stack), findsOneWidget);
+      expect(find.byType(Stack), findsNWidgets(3));
     });
   });
 }
