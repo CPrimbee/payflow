@@ -59,7 +59,7 @@ class _BarcodeScannerPageState extends State<BarcodeScannerPage> {
             child: Scaffold(
                 backgroundColor: Colors.transparent,
                 appBar: AppBar(
-                  backgroundColor: Colors.black,
+                  backgroundColor: Colors.black.withOpacity(0.6),
                   title: Text("Escaneie o código de barras do boleto",
                       style: AppTextStyles.buttonBackground),
                   centerTitle: true,
@@ -68,10 +68,6 @@ class _BarcodeScannerPageState extends State<BarcodeScannerPage> {
                   ),
                 ),
                 body: Column(children: [
-                  Expanded(
-                      child: Container(
-                    color: Colors.black.withOpacity(0.6),
-                  )),
                   Expanded(
                       flex: 2,
                       child: Container(
@@ -86,7 +82,8 @@ class _BarcodeScannerPageState extends State<BarcodeScannerPage> {
                     enablePrimaryColor: false,
                     primaryLabel: "Inserir código do boleto",
                     primaryOnPressed: () {
-                      Navigator.pushReplacementNamed(context, "/insert_boleto");
+                      Navigator.pushReplacementNamed(context, "/insert_boleto",
+                          arguments: controller.status.barcode);
                     },
                     secondaryLabel: "Adicionar da galeria",
                     secondaryOnPressed: () {})),
@@ -101,11 +98,10 @@ class _BarcodeScannerPageState extends State<BarcodeScannerPage> {
                         "Tente escanear novamente ou digite o código do seu boleto",
                     primaryLabel: "Escanear novamente",
                     primaryOnPressed: () {
-                      controller.scanWithCamera();
+                      Navigator.pushNamed(context, "/barcode_scanner");
                     },
                     secondaryLabel: "Digitar código",
                     secondaryOnPressed: () {
-                      print('clicou');
                       Navigator.pushReplacementNamed(context, "/insert_boleto");
                     });
               } else {
