@@ -21,7 +21,8 @@ class _BarcodeScannerPageState extends State<BarcodeScannerPage> {
     controller.getAvailableCameras();
     controller.statusNotifier.addListener(() {
       if (controller.status.hasBarcode) {
-        Navigator.pushReplacementNamed(context, "/insert_boleto");
+        Navigator.pushReplacementNamed(context, "/insert_boleto",
+            arguments: controller.status.barcode);
       }
     });
     super.initState();
@@ -79,14 +80,14 @@ class _BarcodeScannerPageState extends State<BarcodeScannerPage> {
                   )),
                 ]),
                 bottomNavigationBar: SetLabelButtons(
-                    enablePrimaryColor: false,
-                    primaryLabel: "Inserir código do boleto",
-                    primaryOnPressed: () {
-                      Navigator.pushReplacementNamed(context, "/insert_boleto",
-                          arguments: controller.status.barcode);
-                    },
-                    secondaryLabel: "Adicionar da galeria",
-                    secondaryOnPressed: () {})),
+                  enablePrimaryColor: false,
+                  primaryLabel: "Inserir código do boleto",
+                  primaryOnPressed: () {
+                    controller.status = BarcodeScannerStatus.error("Error");
+                  },
+                  secondaryLabel: "Adicionar da galeria",
+                  secondaryOnPressed: controller.scanWithCamera,
+                )),
           ),
           ValueListenableBuilder<BarcodeScannerStatus>(
             valueListenable: controller.statusNotifier,
@@ -98,7 +99,7 @@ class _BarcodeScannerPageState extends State<BarcodeScannerPage> {
                         "Tente escanear novamente ou digite o código do seu boleto",
                     primaryLabel: "Escanear novamente",
                     primaryOnPressed: () {
-                      Navigator.pushNamed(context, "/barcode_scanner");
+                      controller.scanWithCamera();
                     },
                     secondaryLabel: "Digitar código",
                     secondaryOnPressed: () {
