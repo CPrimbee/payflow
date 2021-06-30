@@ -82,7 +82,8 @@ class _BarcodeScannerPageState extends State<BarcodeScannerPage> {
                     enablePrimaryColor: false,
                     primaryLabel: "Inserir código do boleto",
                     primaryOnPressed: () {
-                      Navigator.pushReplacementNamed(context, "/insert_boleto");
+                      Navigator.pushReplacementNamed(context, "/insert_boleto",
+                          arguments: controller.status.barcode);
                     },
                     secondaryLabel: "Adicionar da galeria",
                     secondaryOnPressed: () {})),
