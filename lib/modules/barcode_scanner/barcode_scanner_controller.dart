@@ -63,8 +63,10 @@ class BarcodeScannerController {
 
   void scanWithImagePicker() async {
     final response = await ImagePicker().getImage(source: ImageSource.gallery);
-    final inputImage = InputImage.fromFilePath(response!.path);
-    scannerBarCode(inputImage);
+    if (response != null) {
+      final inputImage = InputImage.fromFilePath(response.path);
+      scannerBarCode(inputImage);
+    }
   }
 
   void listenCamera() {
