@@ -22,7 +22,7 @@ class BarcodeScannerController {
           (element) => element.lensDirection == CameraLensDirection.back);
       cameraController = CameraController(
         camera,
-        ResolutionPreset.high,
+        ResolutionPreset.max,
         enableAudio: false,
       );
       await cameraController!.initialize();
