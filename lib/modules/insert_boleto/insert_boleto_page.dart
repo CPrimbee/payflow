@@ -24,12 +24,12 @@ class _InsertBoletoPageState extends State<InsertBoletoPage> {
   );
 
   final dueDateInputTextController = MaskedTextController(mask: "00/00/0000");
-  final barcodInputTextController = TextEditingController();
+  final barcodeInputTextController = TextEditingController();
 
   @override
   void initState() {
-    if (widget.barcode != null) {
-      barcodInputTextController.text = widget.barcode!;
+    if (widget.barcode != "null") {
+      barcodeInputTextController.text = widget.barcode!;
     }
     super.initState();
   }
@@ -67,23 +67,26 @@ class _InsertBoletoPageState extends State<InsertBoletoPage> {
                 child: Column(
                   children: [
                     InputTextWidget(
+                      keyboardType: TextInputType.text,
                       label: 'Nome do boleto',
                       icon: Icons.description_outlined,
-                      validator: controller.validateName,
                       onChanged: (value) {
                         controller.onChange(name: value);
                       },
+                      validator: controller.validateName,
                     ),
                     InputTextWidget(
+                      keyboardType: TextInputType.datetime,
                       controller: dueDateInputTextController,
                       label: 'Vencimento',
                       icon: FontAwesomeIcons.timesCircle,
-                      validator: controller.validateVencimento,
                       onChanged: (value) {
                         controller.onChange(dueDate: value);
                       },
+                      validator: controller.validateVencimento,
                     ),
                     InputTextWidget(
+                      keyboardType: TextInputType.number,
                       controller: moneyInputTextController,
                       label: 'Valor',
                       icon: FontAwesomeIcons.wallet,
@@ -95,13 +98,14 @@ class _InsertBoletoPageState extends State<InsertBoletoPage> {
                       },
                     ),
                     InputTextWidget(
-                      controller: barcodInputTextController,
+                      keyboardType: TextInputType.number,
+                      controller: barcodeInputTextController,
                       label: 'Código',
                       icon: FontAwesomeIcons.barcode,
-                      validator: controller.validateCodigo,
                       onChanged: (value) {
                         controller.onChange(barcode: value);
                       },
+                      validator: controller.validateCodigo,
                     ),
                   ],
                 ),
@@ -117,8 +121,9 @@ class _InsertBoletoPageState extends State<InsertBoletoPage> {
         },
         secondaryLabel: 'Cadastrar',
         secondaryOnPressed: () async {
-          await controller.cadastrarBoleto();
-          Navigator.pop(context);
+          if (await controller.cadastrarBoleto()) {
+            Navigator.pop(context);
+          }
         },
         enableSecondaryColor: true,
       ),

@@ -22,7 +22,7 @@ class BarcodeScannerController {
           (element) => element.lensDirection == CameraLensDirection.back);
       cameraController = CameraController(
         camera,
-        ResolutionPreset.high,
+        ResolutionPreset.max,
         enableAudio: false,
       );
       await cameraController!.initialize();
@@ -63,8 +63,10 @@ class BarcodeScannerController {
 
   void scanWithImagePicker() async {
     final response = await ImagePicker().getImage(source: ImageSource.gallery);
-    final inputImage = InputImage.fromFilePath(response!.path);
-    scannerBarCode(inputImage);
+    if (response != null) {
+      final inputImage = InputImage.fromFilePath(response.path);
+      scannerBarCode(inputImage);
+    }
   }
 
   void listenCamera() {

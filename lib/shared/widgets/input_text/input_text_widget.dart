@@ -9,6 +9,7 @@ class InputTextWidget extends StatelessWidget {
   final String? initialValue;
   final String? Function(String?)? validator;
   final TextEditingController? controller;
+  final TextInputType? keyboardType;
   final void Function(String value) onChanged;
 
   const InputTextWidget({
@@ -19,6 +20,7 @@ class InputTextWidget extends StatelessWidget {
     this.validator,
     this.controller,
     required this.onChanged,
+    this.keyboardType,
   }) : super(key: key);
 
   @override
@@ -30,6 +32,7 @@ class InputTextWidget extends StatelessWidget {
         child: Column(
           children: [
             TextFormField(
+              keyboardType: keyboardType,
               controller: controller,
               onChanged: onChanged,
               initialValue: initialValue,
