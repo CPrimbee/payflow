@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:payflow/app_widget.dart';
 
 void main() {
-  runApp(AppFirebase());
+  runApp(const AppFirebase());
 }
 
 class AppFirebase extends StatefulWidget {
+  const AppFirebase({Key? key}) : super(key: key);
+
   // This widget is the root of your application.
   @override
   _AppFirebaseState createState() => _AppFirebaseState();
@@ -22,7 +24,7 @@ class _AppFirebaseState extends State<AppFirebase> {
       future: _initialization,
       builder: (context, snapshot) {
         if (snapshot.hasError) {
-          return Material(
+          return const Material(
             child: Center(
               child: Text(
                 "Não foi possível inicializar o Firebase",
@@ -33,7 +35,7 @@ class _AppFirebaseState extends State<AppFirebase> {
         } else if (snapshot.connectionState == ConnectionState.done) {
           return AppWidget();
         } else {
-          return Material(
+          return const Material(
             child: Center(
               child: CircularProgressIndicator(),
             ),

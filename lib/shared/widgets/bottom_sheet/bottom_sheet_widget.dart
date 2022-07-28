@@ -62,7 +62,7 @@ class BottomSheetWidget extends StatelessWidget {
                       secondaryLabel: secondaryLabel,
                       secondaryOnPressed: secondaryOnPressed,
                     ),
-                    SizedBox(height: 2),
+                    const SizedBox(height: 2),
                   ],
                 ),
               ],

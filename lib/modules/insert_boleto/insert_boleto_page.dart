@@ -41,7 +41,7 @@ class _InsertBoletoPageState extends State<InsertBoletoPage> {
       appBar: AppBar(
         backgroundColor: AppColors.background,
         elevation: 0,
-        leading: BackButton(
+        leading: const BackButton(
           color: AppColors.input,
         ),
       ),
@@ -59,7 +59,7 @@ class _InsertBoletoPageState extends State<InsertBoletoPage> {
                   textAlign: TextAlign.center,
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 24,
               ),
               Form(
@@ -79,7 +79,7 @@ class _InsertBoletoPageState extends State<InsertBoletoPage> {
                       keyboardType: TextInputType.datetime,
                       controller: dueDateInputTextController,
                       label: 'Vencimento',
-                      icon: FontAwesomeIcons.timesCircle,
+                      icon: FontAwesomeIcons.circleXmark,
                       onChanged: (value) {
                         controller.onChange(dueDate: value);
                       },

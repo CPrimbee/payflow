@@ -5,7 +5,7 @@ import 'package:payflow/modules/login/login_page.dart';
 void main() {
   group('Login Page', () {
     testWidgets('Login Page Test', (WidgetTester tester) async {
-      await tester.pumpWidget(MaterialApp(
+      await tester.pumpWidget(const MaterialApp(
         home: LoginPage(),
       ));
 
@@ -13,7 +13,7 @@ void main() {
     });
 
     testWidgets('Login Google button exists test', (WidgetTester tester) async {
-      await tester.pumpWidget(MaterialApp(
+      await tester.pumpWidget(const MaterialApp(
         home: LoginPage(),
       ));
 

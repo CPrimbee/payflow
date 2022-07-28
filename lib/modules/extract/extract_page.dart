@@ -30,8 +30,8 @@ class _ExtractPageState extends State<ExtractPage> {
               ],
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 24),
+          const Padding(
+            padding: EdgeInsets.symmetric(vertical: 24, horizontal: 24),
             child: Divider(
               thickness: 1,
               height: 1,

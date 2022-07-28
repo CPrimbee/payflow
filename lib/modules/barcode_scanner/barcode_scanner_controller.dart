@@ -35,16 +35,17 @@ class BarcodeScannerController {
 
   void scanWithCamera() {
     status = BarcodeScannerStatus.available();
-    Future.delayed(Duration(seconds: 20)).then((value) {
-      if (status.hasBarcode == false)
+    Future.delayed(const Duration(seconds: 20)).then((value) {
+      if (status.hasBarcode == false) {
         status = BarcodeScannerStatus.error("Timeout de leitura de boleto");
+      }
     });
   }
 
   Future<void> scannerBarCode(InputImage inputImage) async {
     try {
       final barcodes = await barcodeScanner.processImage(inputImage);
-      var barcode;
+      String? barcode;
       for (Barcode item in barcodes) {
         barcode = item.displayValue;
       }
@@ -57,7 +58,9 @@ class BarcodeScannerController {
 
       return;
     } catch (e) {
-      print("ERRO DA LEITURA $e");
+      if (kDebugMode) {
+        print("ERRO DA LEITURA $e");
+      }
     }
   }
 
@@ -81,7 +84,7 @@ class BarcodeScannerController {
             final bytes = allBytes.done().buffer.asUint8List();
             final Size imageSize = Size(
                 cameraImage.width.toDouble(), cameraImage.height.toDouble());
-            final InputImageRotation imageRotation =
+            const InputImageRotation imageRotation =
                 InputImageRotation.rotation0deg;
             final InputImageFormat inputImageFormat =
                 InputImageFormatValue.fromRawValue(cameraImage.format.raw) ??
@@ -106,7 +109,9 @@ class BarcodeScannerController {
                 bytes: bytes, inputImageData: inputImageData);
             scannerBarCode(inputImageCamera);
           } catch (e) {
-            print(e);
+            if (kDebugMode) {
+              print(e);
+            }
           }
         }
       });

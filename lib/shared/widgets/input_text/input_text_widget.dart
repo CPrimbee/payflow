@@ -59,7 +59,7 @@ class InputTextWidget extends StatelessWidget {
                 border: InputBorder.none,
               ),
             ),
-            Divider(
+            const Divider(
               height: 1,
               thickness: 1,
               color: AppColors.stroke,
