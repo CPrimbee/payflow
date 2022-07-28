@@ -46,7 +46,7 @@ class BarcodeScannerController {
       final barcodes = await barcodeScanner.processImage(inputImage);
       var barcode;
       for (Barcode item in barcodes) {
-        barcode = item.value.displayValue;
+        barcode = item.displayValue;
       }
 
       if (barcode != null && status.barcode.isEmpty) {
@@ -62,7 +62,7 @@ class BarcodeScannerController {
   }
 
   void scanWithImagePicker() async {
-    final response = await ImagePicker().getImage(source: ImageSource.gallery);
+    final response = await ImagePicker().pickImage(source: ImageSource.gallery);
     if (response != null) {
       final inputImage = InputImage.fromFilePath(response.path);
       scannerBarCode(inputImage);
@@ -82,10 +82,10 @@ class BarcodeScannerController {
             final Size imageSize = Size(
                 cameraImage.width.toDouble(), cameraImage.height.toDouble());
             final InputImageRotation imageRotation =
-                InputImageRotation.Rotation_0deg;
+                InputImageRotation.rotation0deg;
             final InputImageFormat inputImageFormat =
-                InputImageFormatMethods.fromRawValue(cameraImage.format.raw) ??
-                    InputImageFormat.NV21;
+                InputImageFormatValue.fromRawValue(cameraImage.format.raw) ??
+                    InputImageFormat.nv21;
             final planeData = cameraImage.planes.map(
               (Plane plane) {
                 return InputImagePlaneMetadata(
