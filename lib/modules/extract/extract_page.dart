@@ -8,10 +8,10 @@ class ExtractPage extends StatefulWidget {
   const ExtractPage({Key? key}) : super(key: key);
 
   @override
-  _ExtractPageState createState() => _ExtractPageState();
+  ExtractPageState createState() => ExtractPageState();
 }
 
-class _ExtractPageState extends State<ExtractPage> {
+class ExtractPageState extends State<ExtractPage> {
   final controller = BoletoListController();
 
   @override
@@ -30,8 +30,8 @@ class _ExtractPageState extends State<ExtractPage> {
               ],
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 24),
+          const Padding(
+            padding: EdgeInsets.symmetric(vertical: 24, horizontal: 24),
             child: Divider(
               thickness: 1,
               height: 1,

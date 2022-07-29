@@ -10,10 +10,10 @@ class BarcodeScannerPage extends StatefulWidget {
   const BarcodeScannerPage({Key? key}) : super(key: key);
 
   @override
-  _BarcodeScannerPageState createState() => _BarcodeScannerPageState();
+  BarcodeScannerPageState createState() => BarcodeScannerPageState();
 }
 
-class _BarcodeScannerPageState extends State<BarcodeScannerPage> {
+class BarcodeScannerPageState extends State<BarcodeScannerPage> {
   final controller = BarcodeScannerController();
 
   @override
@@ -64,7 +64,7 @@ class _BarcodeScannerPageState extends State<BarcodeScannerPage> {
                   title: Text("Escaneie o código de barras do boleto",
                       style: AppTextStyles.buttonBackground),
                   centerTitle: true,
-                  leading: BackButton(
+                  leading: const BackButton(
                     color: AppColors.background,
                   ),
                 ),

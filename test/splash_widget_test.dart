@@ -6,7 +6,7 @@ void main() {
   group('Splash Page', () {
     testWidgets('Splash Page Test', (WidgetTester tester) async {
       // Build our app and trigger a frame.
-      await tester.pumpWidget(MaterialApp(
+      await tester.pumpWidget(const MaterialApp(
         home: SplashPage(),
       ));
 

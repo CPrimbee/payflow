@@ -11,16 +11,16 @@ class HomePage extends StatefulWidget {
   const HomePage({Key? key, required this.user}) : super(key: key);
 
   @override
-  _HomePageState createState() => _HomePageState();
+  HomePageState createState() => HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class HomePageState extends State<HomePage> {
   final controller = HomeController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(152),
+        preferredSize: const Size.fromHeight(152),
         child: Container(
           height: 152,
           color: AppColors.primary,
@@ -31,7 +31,7 @@ class _HomePageState extends State<HomePage> {
                   style: AppTextStyles.titleRegular,
                   children: [
                     TextSpan(
-                        text: "${widget.user.name}",
+                        text: widget.user.name,
                         style: AppTextStyles.titleBoldBackground)
                   ])),
               subtitle: Text(
@@ -59,7 +59,7 @@ class _HomePageState extends State<HomePage> {
           key: UniqueKey(),
         )
       ][controller.currentPage],
-      bottomNavigationBar: Container(
+      bottomNavigationBar: SizedBox(
         height: 90,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -86,7 +86,7 @@ class _HomePageState extends State<HomePage> {
                 decoration: BoxDecoration(
                     color: AppColors.primary,
                     borderRadius: BorderRadius.circular(5)),
-                child: Icon(
+                child: const Icon(
                   Icons.add_box_outlined,
                   color: AppColors.background,
                 ),

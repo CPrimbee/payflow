@@ -35,18 +35,19 @@ class BarcodeScannerController {
 
   void scanWithCamera() {
     status = BarcodeScannerStatus.available();
-    Future.delayed(Duration(seconds: 20)).then((value) {
-      if (status.hasBarcode == false)
+    Future.delayed(const Duration(seconds: 20)).then((value) {
+      if (status.hasBarcode == false) {
         status = BarcodeScannerStatus.error("Timeout de leitura de boleto");
+      }
     });
   }
 
   Future<void> scannerBarCode(InputImage inputImage) async {
     try {
       final barcodes = await barcodeScanner.processImage(inputImage);
-      var barcode;
+      String? barcode;
       for (Barcode item in barcodes) {
-        barcode = item.value.displayValue;
+        barcode = item.displayValue;
       }
 
       if (barcode != null && status.barcode.isEmpty) {
@@ -57,12 +58,14 @@ class BarcodeScannerController {
 
       return;
     } catch (e) {
-      print("ERRO DA LEITURA $e");
+      if (kDebugMode) {
+        print("ERRO DA LEITURA $e");
+      }
     }
   }
 
   void scanWithImagePicker() async {
-    final response = await ImagePicker().getImage(source: ImageSource.gallery);
+    final response = await ImagePicker().pickImage(source: ImageSource.gallery);
     if (response != null) {
       final inputImage = InputImage.fromFilePath(response.path);
       scannerBarCode(inputImage);
@@ -81,11 +84,11 @@ class BarcodeScannerController {
             final bytes = allBytes.done().buffer.asUint8List();
             final Size imageSize = Size(
                 cameraImage.width.toDouble(), cameraImage.height.toDouble());
-            final InputImageRotation imageRotation =
-                InputImageRotation.Rotation_0deg;
+            const InputImageRotation imageRotation =
+                InputImageRotation.rotation0deg;
             final InputImageFormat inputImageFormat =
-                InputImageFormatMethods.fromRawValue(cameraImage.format.raw) ??
-                    InputImageFormat.NV21;
+                InputImageFormatValue.fromRawValue(cameraImage.format.raw) ??
+                    InputImageFormat.nv21;
             final planeData = cameraImage.planes.map(
               (Plane plane) {
                 return InputImagePlaneMetadata(
@@ -106,7 +109,9 @@ class BarcodeScannerController {
                 bytes: bytes, inputImageData: inputImageData);
             scannerBarCode(inputImageCamera);
           } catch (e) {
-            print(e);
+            if (kDebugMode) {
+              print(e);
+            }
           }
         }
       });
