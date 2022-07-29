@@ -9,10 +9,10 @@ class BoletoListWidget extends StatefulWidget {
       : super(key: key);
 
   @override
-  _BoletoListWidgetState createState() => _BoletoListWidgetState();
+  BoletoListWidgetState createState() => BoletoListWidgetState();
 }
 
-class _BoletoListWidgetState extends State<BoletoListWidget> {
+class BoletoListWidgetState extends State<BoletoListWidget> {
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder<List<BoletoModel>>(

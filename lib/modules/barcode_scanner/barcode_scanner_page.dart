@@ -10,10 +10,10 @@ class BarcodeScannerPage extends StatefulWidget {
   const BarcodeScannerPage({Key? key}) : super(key: key);
 
   @override
-  _BarcodeScannerPageState createState() => _BarcodeScannerPageState();
+  BarcodeScannerPageState createState() => BarcodeScannerPageState();
 }
 
-class _BarcodeScannerPageState extends State<BarcodeScannerPage> {
+class BarcodeScannerPageState extends State<BarcodeScannerPage> {
   final controller = BarcodeScannerController();
 
   @override

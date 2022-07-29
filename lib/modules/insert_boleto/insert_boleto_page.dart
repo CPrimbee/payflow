@@ -12,10 +12,10 @@ class InsertBoletoPage extends StatefulWidget {
   const InsertBoletoPage({Key? key, this.barcode}) : super(key: key);
 
   @override
-  _InsertBoletoPageState createState() => _InsertBoletoPageState();
+  InsertBoletoPageState createState() => InsertBoletoPageState();
 }
 
-class _InsertBoletoPageState extends State<InsertBoletoPage> {
+class InsertBoletoPageState extends State<InsertBoletoPage> {
   final controller = InsertBoletoController();
 
   final moneyInputTextController = MoneyMaskedTextController(

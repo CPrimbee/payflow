@@ -11,10 +11,10 @@ class AppFirebase extends StatefulWidget {
 
   // This widget is the root of your application.
   @override
-  _AppFirebaseState createState() => _AppFirebaseState();
+  AppFirebaseState createState() => AppFirebaseState();
 }
 
-class _AppFirebaseState extends State<AppFirebase> {
+class AppFirebaseState extends State<AppFirebase> {
   final Future<FirebaseApp> _initialization = Firebase.initializeApp();
 
   @override

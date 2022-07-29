@@ -11,10 +11,10 @@ class HomePage extends StatefulWidget {
   const HomePage({Key? key, required this.user}) : super(key: key);
 
   @override
-  _HomePageState createState() => _HomePageState();
+  HomePageState createState() => HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class HomePageState extends State<HomePage> {
   final controller = HomeController();
   @override
   Widget build(BuildContext context) {
